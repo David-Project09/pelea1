@@ -1,32 +1,60 @@
-# Prerequisites
-*.d
+#include <iostream>
+#include <ctime>
+#include <algorithm>
+using std::cin;
+using std::cout;
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
 
-# Precompiled Headers
-*.gch
-*.pch
+int Attack();
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+int main()
+{
 
-# Fortran module files
-*.mod
-*.smod
+	srand((unsigned int)time(NULL));
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+	int HProcky = 150;
+	int HPchabelo = 150;
 
-# Executables
-*.exe
-*.out
-*.app
+	int turno = 1;
+
+	while (HProcky > 0 && HPchabelo > 0)
+	{
+		cout << "Turno no. " << turno << "\n";
+
+
+
+		int dmg = Attack();
+		cout << "rocky golpea! " << dmg << " puntos de daño.\n";
+		HPchabelo -= dmg;
+		cout << "A chabelo le quedan " << std::max(0, HPchabelo) << " puntos de vida.\n";
+
+		if (HPchabelo > 0)
+		{
+			dmg = Attack();
+			cout << "chabelo golpea! " << dmg << " puntos de daño.\n";
+			HProcky -= dmg;
+			cout << "A rocky le quedan " << std::max(0, HProcky) << " puntos de vida.\n";
+		}
+		turno++;
+		system("pause");
+		system("cls");
+	}
+
+	if (HProcky <= 0)
+	{
+		cout << "chabelo gana\n";
+	}
+	else
+	{
+		cout << "rocky gana\n";
+	}
+
+	system("pause");
+	return 0;
+}
+
+
+int Attack()
+{
+	return 1 + rand() % 51;
+}
